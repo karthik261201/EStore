@@ -10,8 +10,10 @@ import { CatnavigationComponent } from './components/catnavigation/catnavigation
 import { SidenavigationComponent } from './components/sidenavigation/sidenavigation.component';
 import { ProductsComponent } from './components/products/products.component';
 import { SharedModule } from '../shared/shared.module';
-import { CategoryService } from './services/category.service';
-import { CategoriesStoreItem } from './services/categories.storeItem';
+import { CategoriesStoreItem } from './services/category/categories.storeItem';
+import { CategoryService } from './services/category/category.service';
+import { ProductsStoreItem } from './services/products/products.storeItem';
+import { ProductsService } from './services/products/products.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { CategoriesStoreItem } from './services/categories.storeItem';
   ],
   providers: [
     CategoryService,
-    CategoriesStoreItem
+    CategoriesStoreItem,
+    ProductsStoreItem,
+    ProductsService
   ]
 })
 export class HomeModule { }
