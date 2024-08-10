@@ -16,6 +16,7 @@ import { ProductsStoreItem } from './services/products/products.storeItem';
 import { ProductsService } from './services/products/products.service';
 import { RouterModule } from '@angular/router';
 import { HomeRoutingModule } from './home-routing.module';
+import { ProductsGalleryComponent } from './components/products-gallery/products-gallery.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { HomeRoutingModule } from './home-routing.module';
     HeaderComponent,
     CatnavigationComponent,
     SidenavigationComponent,
-    ProductsComponent
+    ProductsComponent,
+    ProductsGalleryComponent
   ],
   imports: [
     CommonModule,
