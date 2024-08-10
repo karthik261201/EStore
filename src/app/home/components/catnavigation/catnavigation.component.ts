@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { CategoriesStoreItem } from '../../services/categories.storeItem';
 
 @Component({
   selector: 'app-catnavigation',
@@ -6,5 +8,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./catnavigation.component.scss']
 })
 export class CatnavigationComponent {
+  subscriptions: Subscription = new Subscription(); 
+
+  constructor(public categoryStore : CategoriesStoreItem) {}
 
 }

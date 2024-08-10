@@ -7,7 +7,7 @@
             <div class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" [attr.data-bs-target]="'#collapse'+i">
                     <div class="category-title">
-                        <a href="#">{{mainCategory.categroy}}</a>
+                        <a href="#">{{mainCategory.category}}</a>
                     </div>
                 </button>
             </div>
@@ -15,7 +15,7 @@
                 <div class="accordion-body">
                     <ul>
                         <li *ngFor="let subCategory of getCategories(mainCategory.id)" class="sub-items">
-                            <a href="#">{{subCategory.categroy}}</a>
+                            <a href="#">{{subCategory.category}}</a>
                         </li>
                     </ul>
                 </div>
