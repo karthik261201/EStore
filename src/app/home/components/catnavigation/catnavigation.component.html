@@ -1,9 +1,11 @@
 <div class="navigation-container">
     <ul>
-        <li><a href="#">Home</a></li>
-        <!-- | async pipe will automatically subscribe to that function and unsubscribe it when the component gets destroyed -->
-        <li *ngFor="let category of categoryStore.topLevelCategories$ | async">
-            <a (click)="onCategoryClick(category)">{{category.category}}</a>
-        </li>
+        <li><a routerLink="/home/products">Home</a></li>
+        <ng-container *ngIf="displayOptions">
+            <!-- | async pipe will automatically subscribe to that function and unsubscribe it when the component gets destroyed -->
+            <li *ngFor="let category of categoryStore.topLevelCategories$ | async">
+                <a (click)="onCategoryClick(category)">{{category.category}}</a>
+            </li>
+        </ng-container>
     </ul>
 </div>

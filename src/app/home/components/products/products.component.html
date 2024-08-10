@@ -2,10 +2,12 @@
     <!-- | async pipe will automatically subscribe to that function and unsubscribe it when the component gets destroyed -->
     <div *ngFor="let product of productsStore.products$ | async" class="mx-6 p-3 product-card">
         <div class="product-img-container">
-            <img [src]="'/assets/images/'+product.product_img">
+            <a routerLink="../product/{{product.id}}">
+                <img [src]="'/assets/images/'+product.product_img">
+            </a>
         </div>
         <div class="product-info">
-            <h5><a href="#">{{product.product_name}}</a></h5>
+            <h5><a routerLink="../product/{{product.id}}">{{product.product_name}}</a></h5>
             <p class="product-price" >{{product.price | currency}}</p>
             <p><app-ratings [score]="product.ratings"></app-ratings></p>
         </div>
