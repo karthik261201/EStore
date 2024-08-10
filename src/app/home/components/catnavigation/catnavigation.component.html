@@ -3,7 +3,7 @@
         <li><a href="#">Home</a></li>
         <!-- | async pipe will automatically subscribe to that function and unsubscribe it when the component gets destroyed -->
         <li *ngFor="let category of categoryStore.topLevelCategories$ | async">
-            <a href="#">{{category.category}}</a>
+            <a (click)="onCategoryClick(category)">{{category.category}}</a>
         </li>
     </ul>
 </div>

@@ -19,5 +19,9 @@ export class HomeComponent {
   onSelectSubCategory(subCategoryId: number) {
     this.productsStoreItem.loadProducts('subcategoryid='+subCategoryId);
   }
+
+  onSelectCategory(categoryId: number) {
+    this.productsStoreItem.loadProducts('maincategoryid='+categoryId);
+  }
   
 }

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { CategoriesStoreItem } from '../../services/category/categories.storeItem';
+import { Category } from '../../types/category.type';
 
 @Component({
   selector: 'app-catnavigation',
@@ -8,8 +8,12 @@ import { CategoriesStoreItem } from '../../services/category/categories.storeIte
   styleUrls: ['./catnavigation.component.scss']
 })
 export class CatnavigationComponent {
-  subscriptions: Subscription = new Subscription(); 
+  @Output() categoryClicked: EventEmitter<number> = new EventEmitter<number>();
 
   constructor(public categoryStore : CategoriesStoreItem) {}
+
+  onCategoryClick(category: Category) {
+    this.categoryClicked.emit(category.id);
+  }
 
 }
