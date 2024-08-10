@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CategoriesStoreItem } from './services/category/categories.storeItem';
 import { ProductsStoreItem } from './services/products/products.storeItem';
+import { SearchKeyword } from './types/searchKeyword.type';
 
 @Component({
   selector: 'app-home',
@@ -24,4 +25,7 @@ export class HomeComponent {
     this.productsStoreItem.loadProducts('maincategoryid='+categoryId);
   }
   
+  onSearchKeyword(searchKeyword: SearchKeyword) {
+    this.productsStoreItem.loadProducts('maincategoryid='+searchKeyword.categoryId+'&keyword='+searchKeyword.keyword);
+  }
 }
