@@ -3,6 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Product } from '../../types/products.type';
 import { Subscription } from 'rxjs';
 import { ProductsService } from '../../services/products/products.service';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { CartStoreItem } from '../../services/cart/cart.storeitem';
 
 @Component({
   selector: 'app-productdetails',
@@ -12,10 +14,12 @@ import { ProductsService } from '../../services/products/products.service';
 export class ProductdetailsComponent implements OnInit,OnDestroy  {
   product: Product;
   subscription: Subscription = new Subscription;
+  faShoppingCart = faShoppingCart;
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private productsService: ProductsService
+    private productsService: ProductsService,
+    private cart: CartStoreItem
   ) {}
 
   ngOnInit(): void {
@@ -25,6 +29,10 @@ export class ProductdetailsComponent implements OnInit,OnDestroy  {
         this.product = product[0];
       })
     )
+  }
+
+  addToCart() {
+    this.cart.addProduct(this.product);
   }
 
   ngOnDestroy(): void {

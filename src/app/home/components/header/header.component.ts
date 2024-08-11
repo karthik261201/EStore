@@ -3,6 +3,7 @@ import { faSearch, faUserCircle, faShoppingCart } from '@fortawesome/free-solid-
 import { CategoriesStoreItem } from '../../services/category/categories.storeItem';
 import { SearchKeyword } from '../../types/searchKeyword.type';
 import { NavigationEnd, Router } from '@angular/router';
+import { CartStoreItem } from '../../services/cart/cart.storeitem';
 import { filter } from 'rxjs';
 
 @Component({
@@ -19,7 +20,7 @@ export class HeaderComponent {
 
   displaySearch: boolean = true;
 
-  constructor( public categoryStore: CategoriesStoreItem, private router: Router) {
+  constructor( public categoryStore: CategoriesStoreItem, private router: Router, public cartStore: CartStoreItem) {
     router.events.pipe(filter((event: any) => event instanceof NavigationEnd)).subscribe(event => {
       this.displaySearch = (event as NavigationEnd).url === '/home/products' ? true : false;
     })
