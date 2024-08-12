@@ -33,4 +33,8 @@ export class HeaderComponent {
     })
   }
 
+  navigateToCart() {
+    this.router.navigate(['home/cart']);
+  }
+
 }

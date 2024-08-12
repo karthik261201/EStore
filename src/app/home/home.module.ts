@@ -19,6 +19,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { ProductsGalleryComponent } from './components/products-gallery/products-gallery.component';
 import { ProductdetailsComponent } from './components/productdetails/productdetails.component';
 import { CartStoreItem } from './services/cart/cart.storeitem';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { CartStoreItem } from './services/cart/cart.storeitem';
     SidenavigationComponent,
     ProductsComponent,
     ProductsGalleryComponent,
-    ProductdetailsComponent
+    ProductdetailsComponent,
+    CartComponent
   ],
   imports: [
     CommonModule,
