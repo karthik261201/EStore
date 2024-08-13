@@ -43,59 +43,61 @@
                 </div>
             </div>
         </div>
-        <div class="col-4" *ngIf="cartStore.cart.products.length">
-            <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
-                <div class="row">
-                    <div class="px-4 py-1 my-3 cart-summary">
-                        <h2 class="mb-5 mt-3">Delivery Address</h2>
-                        <div class="form-group row field-margin">
-                            <label for="name" class="col-sm-2 small">Name</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="name" formControlName="name">
+        <div class="col-4">
+            <ng-container *ngIf="cartStore.cart.products.length">
+                <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="px-4 py-1 my-3 cart-summary">
+                            <h2 class="mb-5 mt-3">Delivery Address</h2>
+                            <div class="form-group row field-margin">
+                                <label for="name" class="col-sm-2 small">Name</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="name" formControlName="name">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row field-margin">
-                            <label for="address" class="col-sm-2 small">Address</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="address" formControlName="address">
+                            <div class="form-group row field-margin">
+                                <label for="address" class="col-sm-2 small">Address</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="address" formControlName="address">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row field-margin">
-                            <label for="city" class="col-sm-2 small">City</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="city" formControlName="city">
+                            <div class="form-group row field-margin">
+                                <label for="city" class="col-sm-2 small">City</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="city" formControlName="city">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row field-margin">
-                            <label for="state" class="col-sm-2 small">State</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="state" formControlName="state">
+                            <div class="form-group row field-margin">
+                                <label for="state" class="col-sm-2 small">State</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="state" formControlName="state">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group row field-margin">
-                            <label for="pin" class="col-sm-2 small">Pin</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="pin" formControlName="pin">
+                            <div class="form-group row field-margin">
+                                <label for="pin" class="col-sm-2 small">Pin</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="pin" formControlName="pin">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="px-4 py-3 my-4 cart-summary">
-                        <h2 class="mb-5 mt-3">Summary</h2>
-                        <div>
-                            <span>Cart Total : {{cart.totalAmount | currency}}</span>
-                            <span>Shipping Charges : Free</span>
-                            <hr/>
-                            <span class="summary-total">
-                                Total : {{cart.totalAmount | currency}}
-                            </span>
-                            <hr/>
-                            <button type="submit" class="btn submit-button" [disabled]="!orderForm.valid">Checkout</button>
+                    <div class="row">
+                        <div class="px-4 py-3 my-4 cart-summary">
+                            <h2 class="mb-5 mt-3">Summary</h2>
+                            <div>
+                                <span>Cart Total : {{cart.totalAmount | currency}}</span>
+                                <span>Shipping Charges : Free</span>
+                                <hr/>
+                                <span class="summary-total">
+                                    Total : {{cart.totalAmount | currency}}
+                                </span>
+                                <hr/>
+                                <button type="submit" class="btn submit-button" [disabled]="!orderForm.valid">Checkout</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </ng-container>
         </div>
     </div>
 </ng-container>

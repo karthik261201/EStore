@@ -20,7 +20,8 @@ export interface loggedInUser {
     address: string,
     city: string,
     state: string,
-    pin: string 
+    pin: string,
+    email: string
 }
 
 export interface loginToken {
@@ -28,3 +29,4 @@ export interface loginToken {
     expiresInSeconds: number,
     user: loggedInUser
 }
+
