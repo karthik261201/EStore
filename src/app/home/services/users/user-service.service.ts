@@ -41,7 +41,7 @@ export class UserService {
     return this.httpClient.post(url,{email: email,password: password})
   }
 
-  activateToken(token: loginToken, email: string) {
+  activateToken(token: loginToken) {
     localStorage.setItem('token',token.token)
     localStorage.setItem('expiry',new Date(Date.now() + token.expiresInSeconds*100).toISOString())
     localStorage.setItem('firstName',token.user.firstName)
@@ -50,7 +50,7 @@ export class UserService {
     localStorage.setItem('city',token.user.city)
     localStorage.setItem('state',token.user.state)
     localStorage.setItem('pin',token.user.pin)
-    localStorage.setItem('email',email)
+    localStorage.setItem('email',token.user.email)
 
     this.isAuthenticated.next(true)
     this.loggedInUserInfo.next(token.user)
