@@ -5,10 +5,13 @@ import { loggedInUser, loginToken, user } from 'src/app/home/types/user.type';
 
 @Injectable()
 export class UserService {
+  private autoLogoutTimer: any;
   private isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false)
   private loggedInUserInfo: BehaviorSubject<loggedInUser> = new BehaviorSubject(<loggedInUser>{})
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) { 
+    this.loadToken();
+  }
 
   get isUserAuthenticated() : boolean {
     return this.isAuthenticated.value;
@@ -35,7 +38,7 @@ export class UserService {
   activateToken(token: loginToken) {
     localStorage.setItem('token',token.token)
     localStorage.setItem('expiry',new Date(Date.now() + token.expiresInSeconds*100).toISOString())
-    localStorage.setItem('firsName',token.user.firstName)
+    localStorage.setItem('firstName',token.user.firstName)
     localStorage.setItem('lastName',token.user.lastName)
     localStorage.setItem('address',token.user.address)
     localStorage.setItem('city',token.user.city)
@@ -44,7 +47,54 @@ export class UserService {
 
     this.isAuthenticated.next(true)
     this.loggedInUserInfo.next(token.user)
+    this.setAutoLogoutTimer(token.expiresInSeconds * 1000)
   }
 
+  logout() {
+    localStorage.clear();
+    this.isAuthenticated.next(false);
+    this.loggedInUserInfo.next(<loggedInUser>{});
+    clearTimeout(this.autoLogoutTimer)
+  }
 
+  private setAutoLogoutTimer(duration: number) {
+    this.autoLogoutTimer = setTimeout(() => {
+      this.logout();
+    },duration)
+  }
+
+  loadToken() {
+    const token: string | null = localStorage.getItem('token')
+    const expiry: string | null = localStorage.getItem('expiry')
+    if(!token || !expiry) {
+      return
+    }
+    else {
+      const expiresIn: number = new Date(expiry).getTime() - new Date().getTime();
+      if (expiresIn > 0) {
+        const firstName: string | null = localStorage.getItem('firstName')
+        const lastName: string | null = localStorage.getItem('lastName')
+        const address: string | null = localStorage.getItem('address')
+        const city: string | null = localStorage.getItem('city')
+        const state: string | null = localStorage.getItem('state')
+        const pin: string | null = localStorage.getItem('pin')
+
+        const user: loggedInUser = {
+          firstName : firstName !== null ? firstName : '',
+          lastName : lastName !== null ? lastName : '',
+          address : address !== null ? address : '',
+          city : city !== null ? city : '',
+          state: state !== null ? state : '',
+          pin : pin !== null ? pin : '',
+        }
+
+        this.isAuthenticated.next(true)
+        this.loggedInUserInfo.next(user)
+        this.setAutoLogoutTimer(expiresIn)
+      }
+      else {
+        this.logout();
+      }
+    }
+  }
 }
