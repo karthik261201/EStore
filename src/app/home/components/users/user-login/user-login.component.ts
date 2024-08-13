@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from 'src/app/home/services/users/user-service.service';
@@ -13,7 +14,7 @@ export class UserLoginComponent implements OnInit {
   alertMessage: string = '';
   alertType: number = 0;
 
-  constructor(private fb: FormBuilder, private userService: UserService) {}
+  constructor(private fb: FormBuilder, private userService: UserService, private location: Location) {}
 
   ngOnInit(): void {
     this.userLoginForm = this.fb.group({
@@ -36,6 +37,9 @@ export class UserLoginComponent implements OnInit {
         this.userService.activateToken(result);
         this.alertMessage = 'Login Successful';
         this.alertType = 0;
+        setTimeout(() => {
+          this.location.back();
+        },1000)
       } , error:(error) => {
         this.alertMessage = error.error.message
         this.alertType = 2

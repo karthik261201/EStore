@@ -1,12 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { loginToken, user } from 'src/app/home/types/user.type';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { loggedInUser, loginToken, user } from 'src/app/home/types/user.type';
 
 @Injectable()
 export class UserService {
+  private isAuthenticated: BehaviorSubject<boolean> = new BehaviorSubject(false)
+  private loggedInUserInfo: BehaviorSubject<loggedInUser> = new BehaviorSubject(<loggedInUser>{})
 
   constructor(private httpClient: HttpClient) { }
+
+  get isUserAuthenticated() : boolean {
+    return this.isAuthenticated.value;
+  }
+
+  get isUserAuthenticated$() : Observable<boolean> {
+    return this.isAuthenticated.asObservable();
+  }
+
+  get loggedInUser$() : Observable<loggedInUser> {
+    return this.loggedInUserInfo.asObservable()
+  }
 
   createUser(user: user): Observable<any> {
     const url: string = 'http://localhost:5001/users/signup'
@@ -21,5 +35,16 @@ export class UserService {
   activateToken(token: loginToken) {
     localStorage.setItem('token',token.token)
     localStorage.setItem('expiry',new Date(Date.now() + token.expiresInSeconds*100).toISOString())
+    localStorage.setItem('firsName',token.user.firstName)
+    localStorage.setItem('lastName',token.user.lastName)
+    localStorage.setItem('address',token.user.address)
+    localStorage.setItem('city',token.user.city)
+    localStorage.setItem('state',token.user.state)
+    localStorage.setItem('pin',token.user.pin)
+
+    this.isAuthenticated.next(true)
+    this.loggedInUserInfo.next(token.user)
   }
+
+
 }
